@@ -4,52 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abusive Language Detection</title>
-    <style>
-        body{
-            background-color: lightgreen;
-        }
-        .container{
-            border-radius: 20px;
-            background-color:lightsalmon;
-            text-align: center;
-            border: 2px solid black;
-            max-width: 800px;
-            margin-left: 225px;
-        }
-        button{
-            max-height: 250px;
-            max-width: 250px;
-        }
-        h2{
-            text-align: left;
-            margin-left: 30px;
-        }
-        .row, .col{
-            display:inline-block;
-            vertical-align: top;
-            margin: 20px;
-            margin-top: 0;
-            background-color: lightseagreen;
-            border-radius: 15px;
-            border: 1px solid red;
-        }
-        .row{
-            margin-left: 0px;
-            text-align: left;
-            width: 250px;
-            height: 270px;
-            text-align: center;
-        }
-        .col{
-            text-align: center;
-            width: 410px;
-            height: 270px;
-        }
-    </style>
+    <link rel="stylesheet" href={{ url_for("static", filename="css/styles.css") }}>
 </head>
 <body>
 <div class="container">
-    <h1>Abusive Language Detection</h1><hr>
+    <h1 class="heading">Abusive Language Detection</h1>
     <form method="POST">
         <textarea name="text" rows="5" cols="50" placeholder="Enter text here..."></textarea><br><br>
         <button type="submit" value="Check"><b>Predict</b></button>
@@ -61,16 +20,26 @@
         <p style="text-align: left; margin-left: 30px;"><strong>Prediction:</strong>&nbsp;&nbsp;&nbsp;&nbsp; {{ result.prediction }}</p>
         <hr>
         <div class="row">
-        <h3>Performance Metrics:</h3><hr>
-        <p><strong>Accuracy:</strong> {{ result.accuracy }}</p>
-        <p><strong>Precision:</strong> {{ result.precision }}</p>
-        <p><strong>F1 Score:</strong> {{ result.f1_score }}</p>
+            <h3>Performance Metrics:</h3><hr>
+            <p><strong>Accuracy:</strong> {{ result.accuracy }}</p>
+            <p><strong>Precision:</strong> {{ result.precision }}</p>
+            <p><strong>F1 Score:</strong> {{ result.f1_score }}</p>
         </div>
         <div class="col">
-        <h3>Classification Report:</h3><hr>
-        <pre>{{ result.classification_report }}</pre>
-    {% endif %}
+            <h3>Classification Report:</h3><hr>
+            <pre>{{ result.classification_report }}</pre>
         </div>
+    {% endif %}
 </div>
+
+<!-- New side container for displaying results -->
+{% if result %}
+<div class="side-container">
+    <h3>Additional Info:</h3>
+    <p>Some additional content can go here.</p>
+    <!-- You can populate this with more information as needed -->
+</div>
+{% endif %}
 </body>
 </html>
+
